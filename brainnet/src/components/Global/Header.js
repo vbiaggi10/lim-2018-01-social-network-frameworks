@@ -1,6 +1,7 @@
 //Dependencies
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 //Assets
 import logo from './img/logo.svg';
@@ -12,7 +13,7 @@ class Header extends Component {
     items: PropTypes.array.isRequired
   }
   render() {
-    const {title, items} = this.props;
+    const { title, items } = this.props;
 
     return (
       <div className="Header">
@@ -20,7 +21,8 @@ class Header extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1>{title}</h1>
           <ul className="Menu">
-            {items &&items.map((item, key) => <li key = {key}>{item.title}</li>)}
+            {items && items.map(
+              (item, key) => <li key={key}> <Link to={item.url}> {item.title} </Link> </li>)}
           </ul>
         </header>
       </div>

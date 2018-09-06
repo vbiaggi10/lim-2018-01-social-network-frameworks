@@ -9,12 +9,22 @@
 
 .Header {
   background-color: #222;
-  height: 150px;
+  height: 200px;
   padding: 20px;
   color: white;
   text-align: center;
 }
 
+.Menu{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Menu li{
+  display: inline-block;
+  padding-right: 10px;
+}
 /* .App-title {
   font-size: 1.5em;
 }

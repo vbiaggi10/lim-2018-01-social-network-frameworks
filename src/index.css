@@ -1,0 +1,21 @@
+.content-bg {
+  background: url('./img/wallpaper.jpeg') center center no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 119px);
+}
+
+.content-bg .container {
+  background: #ffffffb4;
+  padding: 1rem;
+}
+
+.desactive {
+  color: rgba(0, 0, 0, .54);
+  border-bottom: .214rem solid transparent;
+}
+
+[class^="bmd-label"] {
+  color: rgba(0, 0, 0, 0.7);
+}

@@ -17,7 +17,6 @@
     "build": "webpack",
     "build:local": "webpack --env.NODE_ENV=local",
     "build:prod": "webpack -p --env.NODE_ENV=production"
- 
   },
   "devDependencies": {
     "babel-preset-stage-2": "6.24.1",

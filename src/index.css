@@ -78,3 +78,9 @@ a{
   padding: 2%;
   margin: auto;
 }
+.create-post .form-group, .create-post div .tools button{
+  margin-bottom: 0;
+}
+.card .card-header{
+  padding: 0 1rem;
+}

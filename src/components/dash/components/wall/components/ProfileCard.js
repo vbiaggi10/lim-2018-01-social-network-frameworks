@@ -9,7 +9,7 @@ class ProfileCard extends Component {
     }
   }
   componentDidMount() {
-    if(!localStorage.getItem("user")){
+    if(localStorage.getItem("user") === 'null'){
       this.setState({user: localStorage.getItem("userEmail")})    
     }else{
       this.setState({user: localStorage.getItem("user")})    

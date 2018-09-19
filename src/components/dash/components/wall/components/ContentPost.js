@@ -33,7 +33,16 @@ class ContentPost extends Component {
       });
       this.setState({ messages });
     });
+    this.db.on("child_removed", snap => {
+      for (let index = 0; index < messages.length; index++) {
+        if (messages[index].id === snap.key) {
+          messages.splice(index, 1)
+        }
+      }
+      this.setState({ messages });
+    });
   }
+
   addPost(message) {
     this.db.push().set({
       body: message,
@@ -41,6 +50,7 @@ class ContentPost extends Component {
       userName: localStorage.getItem("user")
     });
   }
+
   removePost(id){
     this.db.child(id).removePost()
   }

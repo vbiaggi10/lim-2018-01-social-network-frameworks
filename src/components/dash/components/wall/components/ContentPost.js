@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import CreatePost from "./CreatePost";
 import PublishPost from "./PublishPosts";
-// import firebase from 'firebase';
-// import { config } from '../../../Config/config';
-// import 'firebase/database';
 import "./ContentPost.css";
 
 class ContentPost extends Component {
@@ -13,7 +10,6 @@ class ContentPost extends Component {
       messages: [],
       uid: null
     };
-    // this.post = firebase.initializeApp(config);
     this.db = window.firebase
       .database()
       .ref()

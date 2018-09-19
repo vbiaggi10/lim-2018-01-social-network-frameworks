@@ -12,7 +12,7 @@ class Home extends Component {
   }
 	render() {
 		return (
-			<div className="container col-6">
+			<div className="container col-4 mt-4 mb-4">
 				<h2><a>BRAINNET</a></h2>
 				<div className="paragraph">
           <p>"Education is the most powerful weapon which you can use to change the world."</p>

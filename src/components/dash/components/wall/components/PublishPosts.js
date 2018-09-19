@@ -8,7 +8,7 @@ class PublishPost extends Component {
         <div id="loadedPost">
           {this.props.item.map(message => {
             return (
-              <div className="card" key={message.id}>
+              <div className="card mt-3 mb-3" key={message.id}>
                 <div className="card-body">
                   <p className="card-subtitle mb-2 text-muted">
                     {message.userName}

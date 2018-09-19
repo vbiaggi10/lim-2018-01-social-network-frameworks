@@ -69,3 +69,12 @@ a{
 .card .card-body .card-title{
   font-size: 1rem;
 }
+
+.createPost {
+  width: auto;
+  background-color: #b1b1b19d;
+}
+.containerM .col-md-7{
+  padding: 2%;
+  margin: auto;
+}

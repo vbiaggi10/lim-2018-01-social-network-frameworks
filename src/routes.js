@@ -14,9 +14,9 @@ const AppRoutes = () => (
     <Switch>
       {/* <Route exact path="/signin" component={SignIn} /> */}
       {/* <Route exact path="/signup" component={SignUp} /> */}
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/lim-2018-01-social-network-frameworks/profile" component={Profile} />
       {/* <Route exact path="/wall" component={Wall} /> */}
-      <Route exact path="/" component={Wall} />
+      <Route exact path="/lim-2018-01-social-network-frameworks" component={Wall} />
       <Route component={Page404} />
     </Switch>
   </App>

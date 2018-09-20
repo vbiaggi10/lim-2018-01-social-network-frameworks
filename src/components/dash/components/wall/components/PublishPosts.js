@@ -5,14 +5,31 @@ class PublishPost extends Component {
     super(props);
     this.id = props.id;
     this.uid = props.uid;
-    this.body = props.content;
+    this.state ={
+      textInput : props.content
+    }
     this.user = props.user;
     this.privacy = props.privacy;
+    this.handleInput = this.handleInput.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleInput(e){
+    
+    this.setState({
+      textInput:e.target.value
+    })
+  }
+
+  handleChange(){
+    
+    this.props.changePost(this.state.textInput)
   }
 
   handleRemove(id) {
     this.props.removePost(id)
   }
+
   
   render() {
     let isPrivate, isPublic;
@@ -31,8 +48,16 @@ class PublishPost extends Component {
               <p className="card-subtitle mb-2 text-muted">
                 {this.user}
               </p>
-              <p>{this.body}</p>
+            <textarea
+                name="texts"
+                cols="30"
+                rows="5"
+                className="form-control"
+                value={this.state.textInput}
+                onChange={this.handleInput}
+              />
               <a href="" onClick={() => this.handleRemove(this.id)} className="btn btn-primary">Delete</a>
+              <a href="" onClick={() => this.handleChange}className="btn btn-primary">Edit</a>
             </div>
           </div>
         </div>

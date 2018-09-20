@@ -17,6 +17,7 @@ class ContentPost extends Component {
     this.removePost = this.removePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
+    this.changePost = this.changePost.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +43,7 @@ class ContentPost extends Component {
     });
   }
 
+
   removePost(id) {
     this.db.child(id).remove()
   }
@@ -54,10 +56,6 @@ class ContentPost extends Component {
       userName: localStorage.getItem("user"),
       userEmail: localStorage.getItem("userEmail")
     });
-  }
-
-  removePost(id){
-    this.db.child(id).remove()
   }
 
   render() {

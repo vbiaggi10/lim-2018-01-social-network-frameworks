@@ -12,8 +12,7 @@ class ContentPost extends Component {
     // this.post = firebase.initializeApp(config);
     this.db = window.firebase
       .database()
-      .ref()
-      .child("posts");
+      .ref("posts/");
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
     // const userId = window.firebase.auth().currentUser.uid;
@@ -21,29 +20,34 @@ class ContentPost extends Component {
 
   componentDidMount() {
     const { messages } = this.state;
-    this.db.on("child_added", snap => {
-      
-      if (snap.val().uid === localStorage.getItem("userID")) {
-        messages.push({
-          id: snap.key,
-          privacy: snap.val().privacy,
-          body: snap.val().body,
-          uid: snap.val().uid,
-          userName: snap.val().userName,
-          userEmail: snap.val().userEmail,
-          imageUrl: snap.val().imageUrl,
-          count:snap.val().count,
-          timestamp: snap.val().timestamp
-        });
-      }
-      this.setState({ messages });
+    this.db.once("value", snapFirst => {
+      const key=Object.keys(snapFirst.val());
+      key.sort();
+      key.reverse();
+      key.forEach(element=>{
+        this.db.child(element).on('value',snapSecond=>{
+          if (
+            snapSecond.val().uid === localStorage.getItem("userID")) {
+            messages.push({
+              id: snapSecond.key,
+              privacy: snapSecond.val().privacy,
+              body: snapSecond.val().body,
+              uid: snapSecond.val().uid,
+              userName: snapSecond.val().userName,
+              userEmail: snapSecond.val().userEmail,
+              imageUrl: snapSecond.val().imageUrl,
+              timestamp: snapSecond.val().timestamp
+            });
+          }
+          this.setState({ messages });
+        })
+      })
     });
+
     this.db.on("child_removed", snap => {
       for (let index = 0; index < messages.length; index++) {
-        if (snap.val().uid === localStorage.getItem("userID")) {
-          if (messages[index].id === snap.key) {
-            messages.splice(index, 1);
-          }
+        if (messages[index].id === snap.key) {
+          messages.splice(index, 1);
         }
       }
       this.setState({ messages });

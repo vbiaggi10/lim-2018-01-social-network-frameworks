@@ -12,8 +12,7 @@ class ContentPost extends Component {
     };
     this.db = window.firebase
       .database()
-      .ref()
-      .child("posts");
+      .ref("posts/");
     this.removePost = this.removePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
@@ -21,23 +20,31 @@ class ContentPost extends Component {
 
   componentDidMount() {
     const { messages } = this.state;
-    this.db.on("child_added", snap => {
-      if (
-        snap.val().uid === localStorage.getItem("userID") ||
-        snap.val().privacy === "public"
-      ) {
-        messages.push({
-          id: snap.key,
-          privacy: snap.val().privacy,
-          body: snap.val().body,
-          uid: snap.val().uid,
-          userName: snap.val().userName,
-          userEmail: snap.val().userEmail,
-          imageUrl: snap.val().imageUrl,
-          timestamp: snap.val().timestamp
-        });
-      }
-      this.setState({ messages });
+
+    this.db.on("value", snapFirst => {
+      const key=Object.keys(snapFirst.val());
+      key.sort();
+      key.reverse();
+      key.forEach(element=>{
+        this.db.child(element).once('value',snapSecond=>{
+          if (
+            snapSecond.val().uid === localStorage.getItem("userID") ||
+            snapSecond.val().privacy === "public"
+          ) {
+            messages.push({
+              id: snapSecond.key,
+              privacy: snapSecond.val().privacy,
+              body: snapSecond.val().body,
+              uid: snapSecond.val().uid,
+              userName: snapSecond.val().userName,
+              userEmail: snapSecond.val().userEmail,
+              imageUrl: snapSecond.val().imageUrl,
+              timestamp: snapSecond.val().timestamp
+            });
+          }
+          this.setState({ messages });
+        })
+      })
     });
     this.db.on("child_removed", snap => {
       for (let index = 0; index < messages.length; index++) {

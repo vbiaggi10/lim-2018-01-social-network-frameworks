@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class PublishPost extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     
     this.id = props.id;
     this.uid = props.uid;
@@ -96,14 +95,13 @@ class PublishPost extends Component {
   }
 
   render() {
-    console.log(this.timestamp)
     let isPrivate, isPublic;
     if (this.privacy === "private") isPrivate = true;
     else isPrivate = false;
     if (this.privacy === "public") isPublic = true;
     else isPublic = false;
-    var timestamp = this.timestamp;
-    console.log(new Date(timestamp * 1000))
+    // var timestamp = this.timestamp;
+    // console.log(new Date(timestamp * 1000))
 
     return (
       <div id="posts">

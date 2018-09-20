@@ -18,7 +18,7 @@ class ProfileCard extends Component {
   render() {
     return (
       <div className="card">
-        <img className="card-img-top" src={imgProfile} alt="url" />
+        <img className="card-img-top imgProfile" src={imgProfile} alt="url" />
         <div className="card-body">
           <h5 className="card-title">{this.state.user}</h5>
         </div>

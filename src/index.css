@@ -60,7 +60,7 @@ a{
   justify-content: space-between;
   padding: 0.5%; 
 }
-.card img{
+.card .imgProfile{
   border-radius: 50%;
   height: 5rem;
   width: 5rem;

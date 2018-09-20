@@ -51,9 +51,9 @@ class SignIn extends Component {
 
   render() {
     return (
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">BRAINNET</a>
-        <form onSubmit={this.handleSubmit.bind(this)} class="form-inline justify-content-end">
+      <nav className="navbar navbar-light bg-light">
+        <a className="navbar-brand">BRAINNET</a>
+        <form onSubmit={this.handleSubmit.bind(this)} className="form-inline justify-content-end">
           <div className="form-group">
             <label htmlFor="exampleInputEmail1" className="bmd-label-floating">Email address (two help blocks)</label>
             <input type="email" name="email" className="form-control" id="exampleInputEmail1" onChange={this.entryAccount.bind(this)} value={this.state.email} />

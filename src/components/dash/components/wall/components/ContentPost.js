@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import CreatePost from "./CreatePost";
 import PublishPost from "./PublishPosts";
-// import firebase from 'firebase';
-// import { config } from '../../../Config/config';
-// import 'firebase/database';
 import "./ContentPost.css";
 
 class ContentPost extends Component {
@@ -13,11 +10,11 @@ class ContentPost extends Component {
       messages: [],
       uid: null
     };
-    // this.post = firebase.initializeApp(config);
     this.db = window.firebase
       .database()
       .ref()
       .child("posts");
+    this.removePost = this.removePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
   }
@@ -27,27 +24,35 @@ class ContentPost extends Component {
     this.db.on("child_added", snap => {
       messages.push({
         id: snap.key,
+        privacy: snap.val().privacy,
         body: snap.val().body,
         uid: snap.val().uid,
-        userName: snap.val().userName
+        userName: snap.val().userName,
+        userEmail: snap.val().userEmail
       });
       this.setState({ messages });
     });
     this.db.on("child_removed", snap => {
       for (let index = 0; index < messages.length; index++) {
         if (messages[index].id === snap.key) {
-          messages.splice(index, 1)
+          messages.splice(index, 1);
         }
       }
       this.setState({ messages });
     });
   }
 
-  addPost(message) {
+  removePost(id) {
+    this.db.child(id).remove()
+  }
+
+  addPost(message, selected) {
     this.db.push().set({
       body: message,
+      privacy: selected,
       uid: localStorage.getItem("userID"),
-      userName: localStorage.getItem("user")
+      userName: localStorage.getItem("user"),
+      userEmail: localStorage.getItem("userEmail")
     });
   }
 
@@ -60,7 +65,32 @@ class ContentPost extends Component {
       <div className="col-md-7">
         <div className="create-post">
           <CreatePost addPost={this.addPost} />
-          <PublishPost item={this.state.messages} removePost={this.removePost}/>
+        </div>
+        <div>
+          <h3 className="mt-4">Post</h3>
+          <div>
+            {
+              this.state.messages.map(message => {
+                let user;
+                if (message.userName === 'null') {
+                  user = message.userEmail;
+                } else {
+                  user = message.userName;
+                }
+                return (
+                  <PublishPost
+                    content={message.body}
+                    privacy={message.privacy}
+                    id={message.id}
+                    uid={message.uid}
+                    key={message.id}
+                    user={user}
+                    removePost={this.removePost}
+                  />
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     );

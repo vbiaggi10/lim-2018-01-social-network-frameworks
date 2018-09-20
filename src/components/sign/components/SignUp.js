@@ -72,7 +72,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="container col-6">
+      <div className="container col-4 mt-4 mb-4">
         <h2>Sing up</h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./CreatePost.css";
+
 class CreatePost extends Component {
   constructor(props) {
     super(props);
@@ -7,7 +7,7 @@ class CreatePost extends Component {
   }
 
   addPost() {
-    this.props.addPost(this.textInput.value);
+    this.props.addPost(this.textInput.value, this.selectOption.value);
     this.textInput.value = "";
     this.textInput.focus();
   }
@@ -15,12 +15,8 @@ class CreatePost extends Component {
   render() {
     return (
       <div className="createPost">
-        <select
-          name="privacy"
-          id="privacyNewPost"
-          className="pull-right privacy-new-post select-style"
-        >
-          <option value="public">public</option>
+        <select className="custom-select" id="inputGroupSelect01" ref={select => (this.selectOption = select)}>
+          <option selected value="public">public</option>
           <option value="private">private</option>
         </select>
         <div className="form-group" id="publicPost">
@@ -35,7 +31,7 @@ class CreatePost extends Component {
         </div>
         <div>
           <div className="tools">
-            <button onClick={this.addPost} className="btn pull-right">
+            <button onClick={this.addPost} className="btn">
               Publish
             </button>
           </div>

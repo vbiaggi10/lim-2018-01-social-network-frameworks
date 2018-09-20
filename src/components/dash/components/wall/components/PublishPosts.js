@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 
 class PublishPost extends Component {
-  hanldeRemovePost(id){
+  constructor(){
+    super();
+    this.handleRemovePost = this.handleRemovePost.bind(this)
+  }
+  handleRemovePost(id){
     this.props.removePost(id)
   }
+
   render() {
+    console.log(this.props);
+    
     return (
       <div id="posts">
         <h3>Posts</h3>
@@ -18,7 +25,7 @@ class PublishPost extends Component {
                   </p>
                   <p>{message.body}</p>
                 </div>
-                <button onClick={()=>this.hanldeRemovePost(message.id)}>Eliminar</button>
+                <button onClick={()=>this.handleRemovePost(message.id)}>Eliminar</button>
               </div>
             );
           })}

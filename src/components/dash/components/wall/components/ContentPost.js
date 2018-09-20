@@ -52,8 +52,9 @@ class ContentPost extends Component {
   }
 
   removePost(id){
-    this.db.child(id).removePost()
+    this.db.child(id).remove()
   }
+
   render() {
     return (
       <div className="col-md-7">

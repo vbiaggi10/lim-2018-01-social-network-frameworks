@@ -10,7 +10,7 @@ class CreatePost extends Component {
   }
 
   addPost() {
-    this.props.addPost(this.textInput.value, this.selectOption.value);
+    this.props.addPost(this.textInput.value, this.selectOption.value,this.state.count);
     this.textInput.value = "";
     this.textInput.focus();
   }

@@ -15,10 +15,34 @@ class PublishPost extends Component {
     this.timestamp = props.timestamp;
     this.state={
       textInput:props.content,
+      count:props.count,
+      show:true
     }
   }
+  IncrementItem = () => {
+    this.setState({ count: this.state.count + 1 });
+    const postData = {
+      uid: this.uid,
+      body: this.state.textInput,
+      userName: this.userName,
+      userEmail: this.userEmail,
+      privacy: this.privacy,
+      count:this.state.count,
+      // imageUrl: this.imageUrl,
+      timestamp: this.timestamp
+    };
+    const updatesPost = {};
 
+    updatesPost["/posts/" + this.id] = postData;
 
+    return window.firebase
+      .database()
+      .ref()
+      .update(updatesPost);
+  }
+  ToggleClick = () => {
+    this.setState({ show: !this.state.show });
+  }
 
 
   handleInput(e){
@@ -33,6 +57,7 @@ class PublishPost extends Component {
       userName: this.userName,
       userEmail: this.userEmail,
       privacy: this.privacy,
+      count:this.state.count,
       // imageUrl: this.imageUrl,
       timestamp: this.timestamp
     };
@@ -56,6 +81,7 @@ class PublishPost extends Component {
       userName: this.userName,
       userEmail: this.userEmail,
       privacy: e.target.value,
+      count:this.state.count,
       // imageUrl: this.imageUrl,
       timestamp: this.timestamp
     };

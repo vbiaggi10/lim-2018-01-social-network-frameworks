@@ -17,7 +17,6 @@ class ContentPost extends Component {
     this.removePost = this.removePost.bind(this);
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
-    this.changePost = this.changePost.bind(this);
   }
 
   componentDidMount() {

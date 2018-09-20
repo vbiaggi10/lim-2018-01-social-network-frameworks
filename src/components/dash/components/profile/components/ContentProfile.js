@@ -59,6 +59,7 @@ class ContentPost extends Component {
       uid: localStorage.getItem("userID"),
       userName: localStorage.getItem("user"),
       userEmail: localStorage.getItem("userEmail"),
+      count:0,
       timestamp: window.firebase.database.ServerValue.TIMESTAMP
     });
   }
@@ -92,6 +93,7 @@ class ContentPost extends Component {
                   userEmail={message.userEmail}
                   removePost={this.removePost}
                   imageUrl={message.imageUrl}
+                  count={message.count}
                   timestamp={message.timestamp}
                 />
               );

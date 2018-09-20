@@ -23,14 +23,21 @@ class ContentPost extends Component {
   componentDidMount() {
     const { messages } = this.state;
     this.db.on("child_added", snap => {
-      messages.push({
-        id: snap.key,
-        privacy: snap.val().privacy,
-        body: snap.val().body,
-        uid: snap.val().uid,
-        userName: snap.val().userName,
-        userEmail: snap.val().userEmail
-      });
+      if (
+        snap.val().uid === localStorage.getItem("userID") ||
+        snap.val().privacy === "public"
+      ) {
+        messages.push({
+          id: snap.key,
+          privacy: snap.val().privacy,
+          body: snap.val().body,
+          uid: snap.val().uid,
+          userName: snap.val().userName,
+          userEmail: snap.val().userEmail,
+          imageUrl: snap.val().imageUrl,
+          timestamp: snap.val().timestamp
+        });
+      }
       this.setState({ messages });
     });
     this.db.on("child_removed", snap => {
@@ -45,7 +52,7 @@ class ContentPost extends Component {
 
 
   removePost(id) {
-    this.db.child(id).remove()
+    this.db.child(id).remove();
   }
 
   addPost(message, selected) {
@@ -54,7 +61,8 @@ class ContentPost extends Component {
       privacy: selected,
       uid: localStorage.getItem("userID"),
       userName: localStorage.getItem("user"),
-      userEmail: localStorage.getItem("userEmail")
+      userEmail: localStorage.getItem("userEmail"),
+      timestamp: window.firebase.database.ServerValue.TIMESTAMP
     });
   }
 
@@ -67,27 +75,29 @@ class ContentPost extends Component {
         <div>
           <h3 className="mt-4">Post</h3>
           <div>
-            {
-              this.state.messages.map(message => {
-                let user;
-                if (message.userName === 'null') {
-                  user = message.userEmail;
-                } else {
-                  user = message.userName;
-                }
-                return (
-                  <PublishPost
-                    content={message.body}
-                    privacy={message.privacy}
-                    id={message.id}
-                    uid={message.uid}
-                    key={message.id}
-                    user={user}
-                    removePost={this.removePost}
-                  />
-                )
-              })
-            }
+            {this.state.messages.map(message => {
+              let user;
+              if (message.userName === "null") {
+                user = message.userEmail;
+              } else {
+                user = message.userName;
+              }
+              return (
+                <PublishPost
+                  content={message.body}
+                  privacy={message.privacy}
+                  id={message.id}
+                  uid={message.uid}
+                  key={message.id}
+                  user={user}
+                  userName={message.userName}
+                  userEmail={message.userEmail}
+                  removePost={this.removePost}
+                  imageUrl={message.imageUrl}
+                  timestamp={message.timestamp}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

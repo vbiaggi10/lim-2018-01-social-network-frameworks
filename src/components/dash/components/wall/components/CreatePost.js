@@ -3,6 +3,9 @@ import React, { Component } from "react";
 class CreatePost extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      count:0
+    }
     this.addPost = this.addPost.bind(this);
   }
 

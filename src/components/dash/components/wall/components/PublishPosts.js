@@ -15,21 +15,10 @@ class PublishPost extends Component {
     this.timestamp = props.timestamp;
     this.state={
       textInput:props.content,
-      count: props.count,
-      show:true
     }
   }
 
-  IncrementItem = () => {
-    this.setState({
-      count:this.state.count +1
-    })
-   
 
-  }
-  ToggleClick = () => {
-    this.setState({ show: !this.state.show });
-  }
 
 
   handleInput(e){

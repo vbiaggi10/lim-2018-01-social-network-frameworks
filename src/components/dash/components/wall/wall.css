@@ -1,0 +1,11 @@
+.page-contents{
+    width: 100%;
+    /* background-color: yellow; */
+    padding: 0.5%;
+}
+.containerM{
+    background-color: #cacaca;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+}

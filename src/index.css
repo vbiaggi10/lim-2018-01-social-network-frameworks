@@ -1,0 +1,86 @@
+.content-bg {
+  background: url('./img/wallpaper.jpeg') center center no-repeat;
+  background-size: cover;
+  /* display: flex; */
+  /* align-items: center; */
+  /* height: calc(100vh - 119px); */
+}
+
+.content-bg .container {
+  background: #ffffffb4;
+  padding: 1rem;
+}
+
+.desactive {
+  color: rgba(0, 0, 0, .54);
+  border-bottom: .214rem solid transparent;
+}
+
+[class^="bmd-label"] {
+  color: rgba(0, 0, 0, 0.7);
+}
+.main{
+  margin: 0;
+  padding: 0;
+}
+.collapse{
+  display: inline-block;
+  width: 30%;
+}
+
+.nav-menu{
+  display: flex;
+  justify-content: space-around;
+  margin: 2%;
+  padding: 2% 1%;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+.dropdown{
+  list-style: none;
+  font-size: 20px;
+  text-decoration: none;
+  
+}
+.header {
+  min-height: 50px;
+}
+.menu {
+  background: #0097A7;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.container-header{
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5%; 
+}
+.card .imgProfile{
+  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
+  margin: 1rem auto;
+}
+.card .card-body .card-title{
+  font-size: 1rem;
+}
+
+.createPost {
+  width: auto;
+  background-color: #b1b1b19d;
+}
+.containerM .col-md-7{
+  padding: 2%;
+  margin: auto;
+}
+.create-post .form-group, .create-post div .tools button{
+  margin-bottom: 0;
+}
+.card .card-header{
+  padding: 0 1rem;
+}

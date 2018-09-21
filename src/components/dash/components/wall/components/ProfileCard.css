@@ -1,0 +1,13 @@
+.col-md-3{
+    background-color: #cf9292;
+    padding: 2%;
+}
+
+.col-md-3 img{
+    width: 100px;
+    height: 100px;
+}
+
+.profile-card{
+    justify-content: center;
+}

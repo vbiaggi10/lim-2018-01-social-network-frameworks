@@ -3,11 +3,15 @@ import React, { Component } from "react";
 class CreatePost extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      count:0,
+      upLoad:0
+    }
     this.addPost = this.addPost.bind(this);
   }
 
   addPost() {
-    this.props.addPost(this.textInput.value, this.selectOption.value);
+    this.props.addPost(this.textInput.value, this.selectOption.value,this.state.count);
     this.textInput.value = "";
     this.textInput.focus();
   }
@@ -28,13 +32,15 @@ class CreatePost extends Component {
             className="form-control"
             placeholder="Write an education post"
           />
-        </div>
+        </div>  
         <div>
-          <div className="tools">
-            <button onClick={this.addPost} className="btn">
-              Publish
-            </button>
-          </div>
+          <progress value={this.state.upLoad} max="100"></progress>
+          <input type="file" onChange={this.handleUpLoad} />
+        </div>
+        <div className="tools">
+          <button onClick={this.addPost} className="btn">
+            Publish
+          </button>
         </div>
       </div>
     );

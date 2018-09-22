@@ -3,17 +3,72 @@ import React, { Component } from "react";
 class PublishPost extends Component {
   constructor(props) {
     super(props);
+    
     this.id = props.id;
     this.uid = props.uid;
-    this.body = props.content;
     this.user = props.user;
     this.userName = props.userName;
     this.userEmail = props.userEmail;
     this.privacy = props.privacy;
     this.imageUrl = props.imageUrl;
     this.timestamp = props.timestamp;
+    this.state={
+      textInput:props.content,
+      count:props.count,
+      show:true
+    }
+  }
+  IncrementItem = () => {
+    this.setState({ count: this.state.count + 1 });
+    const postData = {
+      uid: this.uid,
+      body: this.state.textInput,
+      userName: this.userName,
+      userEmail: this.userEmail,
+      privacy: this.privacy,
+      count:this.state.count,
+      // imageUrl: this.imageUrl,
+      timestamp: this.timestamp
+    };
+    const updatesPost = {};
+
+    updatesPost["/posts/" + this.id] = postData;
+
+    return window.firebase
+      .database()
+      .ref()
+      .update(updatesPost);
+  }
+  ToggleClick = () => {
+    this.setState({ show: !this.state.show });
   }
 
+
+  handleInput(e){
+    this.setState({
+      textInput:e.target.value
+    })
+  }
+  handleChange(){
+    const postData = {
+      uid: this.uid,
+      body: this.state.textInput,
+      userName: this.userName,
+      userEmail: this.userEmail,
+      privacy: this.privacy,
+      count:this.state.count,
+      // imageUrl: this.imageUrl,
+      timestamp: this.timestamp
+    };
+    const updatesPost = {};
+
+    updatesPost["/posts/" + this.id] = postData;
+
+    return window.firebase
+      .database()
+      .ref()
+      .update(updatesPost);
+  }
   handleRemove(id) {
     this.props.removePost(id);
   }
@@ -21,11 +76,12 @@ class PublishPost extends Component {
   handleUpdate(e) {
     const postData = {
       uid: this.uid,
-      body: this.body,
+      body: this.state.textInput,
       userName: this.userName,
       userEmail: this.userEmail,
       privacy: e.target.value,
-      imageUrl: this.imageUrl,
+      count:this.state.count,
+      // imageUrl: this.imageUrl,
       timestamp: this.timestamp
     };
     const updatesPost = {};
@@ -39,14 +95,13 @@ class PublishPost extends Component {
   }
 
   render() {
-    console.log(this.timestamp)
     let isPrivate, isPublic;
     if (this.privacy === "private") isPrivate = true;
     else isPrivate = false;
     if (this.privacy === "public") isPublic = true;
     else isPublic = false;
-    var timestamp = this.timestamp;
-    console.log(new Date(timestamp * 1000))
+    // var timestamp = this.timestamp;
+    // console.log(new Date(timestamp * 1000))
 
     return (
       <div id="posts">
@@ -74,7 +129,14 @@ class PublishPost extends Component {
               {/* <h6 className="card-subtitle mb-2 text-muted">
                 {this.user}
               </h6> */}
-              <p className="card-text">{this.body}</p>
+                <textarea
+                  name="texts"
+                  cols="30"
+                  rows="5"
+                  className="form-control"
+                  value={this.state.textInput}
+                  onChange={this.handleInput.bind(this)}
+                />
               <p className="card-text">
                 <small className="text-muted">
                   Last updated {this.timestamp ? this.timestamp : false} minutes
@@ -82,13 +144,28 @@ class PublishPost extends Component {
                 </small>
               </p>
               {this.uid === localStorage.getItem("userID") ? (
+              <div>
                 <a
-                  href=""
                   onClick={() => this.handleRemove(this.id)}
                   className="btn btn-primary"
                 >
                   Delete
                 </a>
+                <a
+                  href=""
+                  onClick={() => this.handleChange()}
+                  className="btn btn-primary"
+                >
+                  Edit
+                </a>
+                <a
+                  onClick={() => this.IncrementItem() }
+                  className="btn btn-primary"
+                >
+                  Like
+                </a>
+                { this.state.show ? <h2>{ this.state.count }</h2> : '' }
+              </div>
               ) : (
                 false
               )}

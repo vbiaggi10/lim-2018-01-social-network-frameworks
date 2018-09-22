@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './Header.css';
 
 class Header extends Component {
   static propTypes = {
@@ -35,6 +36,7 @@ class Header extends Component {
             </ul>
           </div>
         </nav>
+
       </div>
     );
   }

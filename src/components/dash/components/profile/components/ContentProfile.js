@@ -12,8 +12,7 @@ class ContentPost extends Component {
     // this.post = firebase.initializeApp(config);
     this.db = window.firebase
       .database()
-      .ref()
-      .child("posts");
+      .ref("posts/");
     this.addPost = this.addPost.bind(this);
     this.removePost = this.removePost.bind(this);
     // const userId = window.firebase.auth().currentUser.uid;
@@ -21,8 +20,11 @@ class ContentPost extends Component {
 
   componentDidMount() {
     const { messages } = this.state;
-    this.db.on("child_added", snap => {
-      if (snap.val().uid === localStorage.getItem("userID")) {
+  
+    this.db.orderByChild('body').on('child_added', snap => {
+      if (
+        snap.val().uid === localStorage.getItem("userID") 
+      ) {
         messages.push({
           id: snap.key,
           privacy: snap.val().privacy,
@@ -31,17 +33,17 @@ class ContentPost extends Component {
           userName: snap.val().userName,
           userEmail: snap.val().userEmail,
           imageUrl: snap.val().imageUrl,
+          count:snap.val().count,
           timestamp: snap.val().timestamp
         });
       }
       this.setState({ messages });
-    });
+    })  
+
     this.db.on("child_removed", snap => {
       for (let index = 0; index < messages.length; index++) {
-        if (snap.val().uid === localStorage.getItem("userID")) {
-          if (messages[index].id === snap.key) {
-            messages.splice(index, 1);
-          }
+        if (messages[index].id === snap.key) {
+          messages.splice(index, 1);
         }
       }
       this.setState({ messages });
@@ -52,26 +54,25 @@ class ContentPost extends Component {
     this.db.child(id).remove();
   }
 
-  addPost(message, selected) {
+  addPost(message, selected,count) {
     this.db.push().set({
       body: message,
       privacy: selected,
-      uid: localStorage.getItem("userID"),
+      uid: localStorage.getItem("userID"),  
       userName: localStorage.getItem("user"),
       userEmail: localStorage.getItem("userEmail"),
+      count:count,
       timestamp: window.firebase.database.ServerValue.TIMESTAMP
     });
   }
 
   render() {
-    // console.log(this.state.messages)
     return (
       <div className="col-md-7">
         <div className="create-post">
           <CreatePost addPost={this.addPost} />
         </div>
         <div className="posts">
-          <div>
             <h3 className="mt-4">Post</h3>
             {this.state.messages.map(message => {
               let user;
@@ -92,11 +93,11 @@ class ContentPost extends Component {
                   userEmail={message.userEmail}
                   removePost={this.removePost}
                   imageUrl={message.imageUrl}
+                  count={message.count}
                   timestamp={message.timestamp}
                 />
               );
             })}
-          </div>
         </div>
       </div>
     );

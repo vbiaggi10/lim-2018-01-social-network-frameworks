@@ -12,15 +12,18 @@ class ContentPost extends Component {
     };
     this.db = window.firebase
       .database()
-      .ref()
-      .child("posts");
+      .ref("posts/");
     this.removePost = this.removePost.bind(this);
     this.addPost = this.addPost.bind(this);
+    this.removePost = this.removePost.bind(this);
   }
 
   componentDidMount() {
-    const { messages } = this.state;
-    this.db.on("child_added", snap => {
+    let { messages } = this.state;
+
+    console.log(this.db)
+
+    this.db.orderByChild('body').on('child_added', snap => {
       if (
         snap.val().uid === localStorage.getItem("userID") ||
         snap.val().privacy === "public"
@@ -33,11 +36,13 @@ class ContentPost extends Component {
           userName: snap.val().userName,
           userEmail: snap.val().userEmail,
           imageUrl: snap.val().imageUrl,
+          count:snap.val().count,
           timestamp: snap.val().timestamp
         });
       }
       this.setState({ messages });
-    });
+    })
+
     this.db.on("child_removed", snap => {
       for (let index = 0; index < messages.length; index++) {
         if (messages[index].id === snap.key) {
@@ -47,6 +52,7 @@ class ContentPost extends Component {
       this.setState({ messages });
     });
   }
+
 
   removePost(id) {
     this.db.child(id).remove();
@@ -59,9 +65,11 @@ class ContentPost extends Component {
       uid: localStorage.getItem("userID"),
       userName: localStorage.getItem("user"),
       userEmail: localStorage.getItem("userEmail"),
+      count:0,
       timestamp: window.firebase.database.ServerValue.TIMESTAMP
     });
   }
+
   render() {
     return (
       <div className="col-md-7">
@@ -71,6 +79,7 @@ class ContentPost extends Component {
         <div>
           <h3 className="mt-4">Post</h3>
           <div>
+            {console.log(this.state.messages)}
             {this.state.messages.map(message => {
               let user;
               if (message.userName === "null") {
@@ -90,6 +99,7 @@ class ContentPost extends Component {
                   userEmail={message.userEmail}
                   removePost={this.removePost}
                   imageUrl={message.imageUrl}
+                  count={message.count}
                   timestamp={message.timestamp}
                 />
               );

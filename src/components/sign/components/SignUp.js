@@ -20,7 +20,7 @@ class SignUp extends Component {
       this.setState({ repeatPassword: e.target.value });
     }
   }
-  
+
   signOther(targetName) {
     let provider;
     if (targetName === "signGoogle") {
@@ -72,88 +72,93 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="container col-4 mt-4 mb-4">
-        <h2>Sing up</h2>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1" className="bmd-label-floating">
-              Email address (two help blocks)
-            </label>
-            <input
-              type="email"
-              name="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              onChange={this.createAccount.bind(this)}
-              value={this.state.email}
-            />
-            <span className="bmd-help">
-              We'll never share your email with anyone else.
-            </span>
-            <span className="bmd-help">
-              And this is probably from a second plugin showing in a non-optimal
-              way
-            </span>
+      <div className="container col-sm-12 col-md-5 mt-4 mb-4 bg-transp">
+        <div className="">
+          <h2>Sing up</h2>
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <div className="form-group">
+              <label
+                htmlFor="exampleInputEmail1"
+                className="bmd-label-floating"
+              >
+                Email address (two help blocks)
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                onChange={this.createAccount.bind(this)}
+                value={this.state.email}
+              />
+              <span className="bmd-help">
+                We'll never share your email with anyone else.
+              </span>
+              <span className="bmd-help">
+                And this is probably from a second plugin showing in a
+                non-optimal way
+              </span>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="exampleInputPassword1"
+                className="bmd-label-floating"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                onChange={this.createAccount.bind(this)}
+                value={this.state.password}
+              />
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="exampleInputPassword2"
+                className="bmd-label-floating"
+              >
+                Repeat password
+              </label>
+              <input
+                type="password"
+                name="repeatPassword"
+                className="form-control"
+                id="exampleInputPassword2"
+                onChange={this.createAccount.bind(this)}
+                value={this.state.repeatPassword}
+              />
+            </div>
+            <button className="btn btn-raised btn-info">Send</button>
+          </form>
+          <div className="text-center">
+            <span>Or sign up using</span>
           </div>
-          <div className="form-group">
-            <label
-              htmlFor="exampleInputPassword1"
-              className="bmd-label-floating"
+          <div className="text-center">
+            <button
+              className="btn btn-outline-info"
+              name="signGoogle"
+              onClick={this.firebaseOtherAuth.bind(this)}
             >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              onChange={this.createAccount.bind(this)}
-              value={this.state.password}
-            />
-          </div>
-          <div className="form-group">
-            <label
-              htmlFor="exampleInputPassword2"
-              className="bmd-label-floating"
+              Google
+            </button>
+            <button
+              className="btn btn-outline-info"
+              name="signTwitter"
+              onClick={this.firebaseOtherAuth.bind(this)}
             >
-              Repeat password
-            </label>
-            <input
-              type="password"
-              name="repeatPassword"
-              className="form-control"
-              id="exampleInputPassword2"
-              onChange={this.createAccount.bind(this)}
-              value={this.state.repeatPassword}
-            />
+              Twitter
+            </button>
+            <button
+              className="btn btn-outline-info"
+              name="signFacebook"
+              onClick={this.firebaseOtherAuth.bind(this)}
+            >
+              Facebook
+            </button>
           </div>
-          <button className="btn btn-raised btn-info">Send</button>
-        </form>
-        <div className="text-center">
-          <span>Or sign up using</span>
-        </div>
-        <div className="text-center">
-          <button
-            className="btn btn-outline-info"
-            name="signGoogle"
-            onClick={this.firebaseOtherAuth.bind(this)}
-          >
-            Google
-          </button>
-          <button
-            className="btn btn-outline-info"
-            name="signTwitter"
-            onClick={this.firebaseOtherAuth.bind(this)}
-          >
-            Twitter
-          </button>
-          <button
-            className="btn btn-outline-info"
-            name="signFacebook"
-            onClick={this.firebaseOtherAuth.bind(this)}
-          >
-            Facebook
-          </button>
         </div>
       </div>
     );

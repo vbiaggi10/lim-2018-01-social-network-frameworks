@@ -72,7 +72,7 @@ class ContentPost extends Component {
 
   render() {
     return (
-      <div className="col-md-7">
+      <div className="col-sm-12">
         <div className="create-post">
           <CreatePost addPost={this.addPost} />
         </div>

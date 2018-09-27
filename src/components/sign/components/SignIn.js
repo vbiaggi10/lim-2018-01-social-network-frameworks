@@ -55,7 +55,7 @@ class SignIn extends Component {
         <a className="navbar-brand">BRAINNET</a>
         <form onSubmit={this.handleSubmit.bind(this)} className="form-inline justify-content-end">
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1" className="bmd-label-floating">Email address (two help blocks)</label>
+            <label htmlFor="exampleInputEmail1" className="bmd-label-floating">Email address</label>
             <input type="email" name="email" className="form-control" id="exampleInputEmail1" onChange={this.entryAccount.bind(this)} value={this.state.email} />
             <span className="bmd-help">We'll never share your email with anyone else.</span>
             <span className="bmd-help" >And this is probably from a second plugin showing in a non-optimal way</span>

@@ -10,11 +10,13 @@ import SignUp from "./components/SignUp";
 class Main extends Component {
   render() {
     return (
-      <div className="content-bg">
+      <div className=" content-bg">
         <SignIn />
-        <div className="row">
-          <Home />
-          <SignUp />
+        <div className="container">
+          <div className="row">
+            <Home />
+            <SignUp />
+          </div>
         </div>
       </div>
     );

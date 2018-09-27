@@ -10,7 +10,7 @@ class ContentMuro extends Component {
         <div className="profile">
           <h2>Wall</h2>
         </div>
-        <div className="containerM">
+        <div className="container containerM">
           <ProfileCard />
           <ContentPost />
         </div>

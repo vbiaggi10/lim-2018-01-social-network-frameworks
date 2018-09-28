@@ -5,7 +5,7 @@ class CreatePost extends Component {
     super(props);
     this.state = {
       count: 0,
-      upLoad: 0
+      // upLoad: 0
     };
     this.addPost = this.addPost.bind(this);
   }
@@ -43,7 +43,7 @@ class CreatePost extends Component {
             placeholder="Write an education post"
           />
         </div>
-        <div>
+        {/* <div>
           <progress value={this.state.upLoad} max="100" />
           <div class="input-group mb-3">
             <div class="custom-file">
@@ -60,8 +60,7 @@ class CreatePost extends Component {
               </label>
             </div>
           </div>
-          {/* <input type="file" onChange={this.handleUpLoad} /> */}
-        </div>
+        </div> */}
         <div className="tools">
           <button onClick={this.addPost} className="btn">
             Publish

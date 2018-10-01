@@ -21,9 +21,7 @@ class ContentPost extends Component {
   componentDidMount() {
     let { messages } = this.state;
 
-    console.log(this.db)
-
-    this.db.orderByChild('body').on('child_added', snap => {
+    this.db.orderByChild('timestamp').on('child_added', snap => {
       if (
         snap.val().uid === localStorage.getItem("userID") ||
         snap.val().privacy === "public"
@@ -79,7 +77,6 @@ class ContentPost extends Component {
         <div>
           <h3 className="mt-4">Post</h3>
           <div>
-            {console.log(this.state.messages)}
             {this.state.messages.map(message => {
               let user;
               if (message.userName === "null") {

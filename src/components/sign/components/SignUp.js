@@ -13,7 +13,6 @@ class SignUp extends Component {
   createAccount(e) {
     if (e.target.name === "email") {
       this.setState({ email: e.target.value });
-      // console.log(e.target.value)
     } else if (e.target.name === "password") {
       this.setState({ password: e.target.value });
     } else if (e.target.name === "repeatPassword") {

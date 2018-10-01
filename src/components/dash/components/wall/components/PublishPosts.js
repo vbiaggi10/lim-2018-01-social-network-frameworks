@@ -15,8 +15,22 @@ class PublishPost extends Component {
     this.state={
       textInput:props.content,
       count:props.count,
-      show:true
+      show:true,
+      txtKey: ''
     }
+    this.myRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.setState({
+      txtKey: `txt${this.state.id}`
+    })
+    if(this.uid !== localStorage.getItem("userID")){
+      const node = this.myRef.current
+      node.setAttribute('disabled', 'disabled');
+    }
+    
+
   }
   IncrementItem = () => {
     this.setState({ count: this.state.count + 1 });
@@ -100,9 +114,6 @@ class PublishPost extends Component {
     else isPrivate = false;
     if (this.privacy === "public") isPublic = true;
     else isPublic = false;
-    // var timestamp = this.timestamp;
-    // console.log(new Date(timestamp * 1000))
-
     return (
       <div id="posts">
         <div id="loadedPost">
@@ -130,6 +141,7 @@ class PublishPost extends Component {
                 {this.user}
               </h6> */}
                 <textarea
+                  ref= {this.myRef}  
                   name="texts"
                   cols="30"
                   rows="5"

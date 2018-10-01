@@ -9,7 +9,6 @@ class Content extends Component {
 
   render() {
     const { body } = this.props;
-    // console.log(body.props.children[0].props.path)
     return (
       <div>
         {body}

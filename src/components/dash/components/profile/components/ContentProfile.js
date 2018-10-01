@@ -21,7 +21,7 @@ class ContentPost extends Component {
   componentDidMount() {
     const { messages } = this.state;
   
-    this.db.orderByChild('body').on('child_added', snap => {
+    this.db.on('child_added', snap => {
       if (
         snap.val().uid === localStorage.getItem("userID") 
       ) {
